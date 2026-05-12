@@ -7,25 +7,27 @@
 <meta name="description" content="Опросный лист для подбора блочно-модульных очистных сооружений. Neo Drain — Neo Water." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --paper:#F2EDE3;
-  --paper-soft:#E8E1D2;
-  --ink:#0D1B26;
-  --ink-soft:#3A4A55;
-  --ink-mute:#76808A;
-  --rule:#0D1B26;
-  --accent:#C6471F;
-  --accent-soft:#E08A5C;
-  --field:#FBF8F1;
-  --field-border:#C7BFAE;
-  --ok:#3F6B3F;
-  --warn:#B6802A;
-  --shadow:0 1px 0 rgba(13,27,38,.05), 0 24px 64px -32px rgba(13,27,38,.18);
-  --display:"Fraunces", "Times New Roman", serif;
-  --body:"IBM Plex Sans", -apple-system, sans-serif;
-  --mono:"JetBrains Mono", ui-monospace, monospace;
+  /* NeoWater brand palette — see ../../NeoWater/brand/colors.md */
+  --paper:#FFFFFF;
+  --paper-soft:#F7F9F9;
+  --ink:#0F2A2C;
+  --ink-soft:#1F3F42;
+  --ink-mute:#5A6E70;
+  --rule:#D9E1E2;
+  --accent:#00B4B3;          /* teal-bright — primary accent */
+  --accent-soft:#19696F;     /* teal-dark — secondary accent */
+  --gold:#F9D373;            /* highlight */
+  --field:#FFFFFF;
+  --field-border:#D9E1E2;
+  --ok:#00B4B3;
+  --warn:#F9D373;
+  --shadow:0 1px 0 rgba(15,42,44,.04), 0 24px 64px -32px rgba(15,42,44,.18);
+  --display:"Manrope", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --body:"Manrope", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono:"Manrope", ui-monospace, monospace;
 }
 *,*::before,*::after{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
@@ -43,16 +45,7 @@ body{
 }
 ::selection{background:var(--accent);color:var(--paper);}
 
-/* paper grain overlay */
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
-  opacity:.35;mix-blend-mode:multiply;
-  background-image:
-    radial-gradient(rgba(13,27,38,.06) 1px,transparent 1px),
-    radial-gradient(rgba(13,27,38,.04) 1px,transparent 1px);
-  background-size:3px 3px, 7px 7px;
-  background-position:0 0, 1px 2px;
-}
+/* clean background — no paper grain (NeoWater is a tech brand, not paper-magazine) */
 
 /* layout shell */
 .shell{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;}
@@ -69,35 +62,23 @@ body::before{
   letter-spacing:.14em;
   text-transform:uppercase;
   position:sticky;top:0;z-index:30;
-  background:var(--paper);
+  background:var(--accent-soft);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
-.brand{display:flex;align-items:center;gap:12px;}
-.brand-mark{
-  width:22px;height:22px;border:1px solid var(--ink);
-  display:grid;place-items:center;
-  position:relative;
-}
-.brand-mark::before{
-  content:"";position:absolute;inset:4px;border:1px solid var(--ink);
-  transform:rotate(45deg);
-}
-.brand-mark::after{
-  content:"";position:absolute;inset:8px;background:var(--accent);
-  transform:rotate(45deg);
-}
+.brand{display:flex;align-items:center;gap:14px;color:var(--gold);}
+.brand-logo{height:24px;width:auto;display:block;color:var(--gold);}
 .brand-text{display:flex;flex-direction:column;line-height:1.1;}
-.brand-text strong{font-weight:500;letter-spacing:.18em;}
-.brand-text span{color:var(--ink-mute);font-size:10px;letter-spacing:.12em;}
-.topbar-center{text-align:center;color:var(--ink-mute);}
-.topbar-right{text-align:right;display:flex;justify-content:flex-end;gap:18px;align-items:center;}
-.save-status{color:var(--ink-mute);}
-.save-status.saved{color:var(--ok);}
+.brand-text strong{font-weight:600;letter-spacing:.14em;color:#fff;}
+.brand-text span{color:rgba(255,255,255,.6);font-size:10px;letter-spacing:.12em;font-weight:500;}
+.topbar-center{text-align:center;color:rgba(255,255,255,.7);}
+.topbar-right{text-align:right;display:flex;justify-content:flex-end;gap:18px;align-items:center;color:rgba(255,255,255,.7);}
+.save-status{color:rgba(255,255,255,.6);}
+.save-status.saved{color:var(--gold);}
 .save-status::before{content:"●";margin-right:6px;color:inherit;}
 
 /* progress rail */
 .rail{
-  height:2px;background:var(--paper-soft);position:relative;
-  border-bottom:1px solid var(--rule);
+  height:3px;background:rgba(25,105,111,.12);position:relative;
 }
 .rail-fill{
   position:absolute;left:0;top:0;bottom:0;background:var(--accent);
@@ -134,26 +115,26 @@ main{flex:1;}
 
 .cover h1{
   font-family:var(--display);
-  font-weight:300;
+  font-weight:800;
   font-size:clamp(48px, 7.4vw, 124px);
-  line-height:.92;
+  line-height:.95;
   letter-spacing:-.025em;
   margin:0 0 32px;
-  font-variation-settings:"opsz" 144, "SOFT" 30;
 }
 .cover h1 em{
-  font-style:italic;font-weight:300;color:var(--accent);
-  font-variation-settings:"opsz" 144, "SOFT" 100;
+  font-style:normal;
+  font-weight:800;
+  color:var(--accent);
 }
 .cover .sub{
-  font-family:var(--display);
-  font-weight:300;
-  font-style:italic;
-  font-size:clamp(20px,2.1vw,28px);
+  font-family:var(--body);
+  font-weight:400;
+  font-size:clamp(18px,1.7vw,22px);
+  line-height:1.5;
   color:var(--ink-soft);
-  max-width:34ch;
+  max-width:38ch;
   margin:0 0 56px;
-  font-variation-settings:"opsz" 36;
+
 }
 
 .specs{
@@ -174,7 +155,7 @@ main{flex:1;}
 }
 .spec-value{
   font-family:var(--display);font-size:22px;font-weight:400;line-height:1.2;
-  font-variation-settings:"opsz" 36;
+
 }
 
 /* TOC */
@@ -193,7 +174,7 @@ main{flex:1;}
 }
 .toc-title{
   font-family:var(--display);font-size:18px;font-weight:400;line-height:1.2;
-  font-variation-settings:"opsz" 24;
+
 }
 .toc-count{font-family:var(--mono);font-size:10px;color:var(--ink-mute);letter-spacing:.1em;}
 
@@ -232,19 +213,19 @@ main{flex:1;}
   font-family:var(--display);
   font-size:clamp(90px,11vw,160px);
   line-height:.85;
-  font-weight:300;
+  font-weight:200;
   margin:24px 0 8px;
-  letter-spacing:-.03em;
-  font-variation-settings:"opsz" 144, "SOFT" 50;
+  letter-spacing:-.04em;
+  color:var(--accent-soft);
 }
-.section-num em{font-style:italic;color:var(--accent);}
+.section-num em{font-style:normal;color:var(--accent);font-weight:200;}
 .section-title{
   font-family:var(--display);
   font-size:clamp(28px,3vw,40px);
-  font-weight:300;
-  line-height:1.05;
+  font-weight:700;
+  line-height:1.1;
   margin:8px 0 18px;
-  font-variation-settings:"opsz" 60, "SOFT" 30;
+  letter-spacing:-.015em;
 }
 .section-desc{
   font-size:14px;color:var(--ink-soft);max-width:38ch;line-height:1.55;
@@ -284,7 +265,7 @@ label.label, .label{
 .label .req{color:var(--accent);margin-left:4px;}
 .label .hint{
   text-transform:none;font-family:var(--body);letter-spacing:.02em;
-  color:var(--ink-mute);font-size:12px;margin-left:8px;font-style:italic;
+  color:var(--ink-mute);font-size:12px;margin-left:8px;
 }
 
 .input, textarea.input, select.input{
@@ -388,40 +369,45 @@ textarea.input{resize:vertical;min-height:90px;font-family:var(--body);line-heig
 }
 .subhead::before{
   content:"§";color:var(--accent);font-family:var(--display);font-size:18px;
-  font-style:italic;
+  
 }
 .subhead:first-child{margin-top:0;padding-top:0;border-top:0;}
 
 /* nav */
 .formnav{
   position:fixed;bottom:0;left:0;right:0;
-  background:var(--paper);
-  border-top:1px solid var(--rule);
+  background:var(--accent-soft);
+  border-top:1px solid rgba(255,255,255,.08);
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
   padding:14px 32px;
   z-index:25;
+  color:rgba(255,255,255,.7);
 }
+.formnav .btn-step b{color:#fff;font-weight:600;}
+.formnav .btn-step{color:rgba(255,255,255,.7);}
 .btn{
-  background:transparent;border:1px solid var(--ink);
-  padding:12px 28px;font-family:var(--mono);font-size:11px;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
-  cursor:pointer;position:relative;overflow:hidden;
-  transition:color .25s;display:inline-flex;align-items:center;gap:10px;
+  background:transparent;border:1px solid var(--accent-soft);
+  padding:12px 28px;font-family:var(--body);font-size:11px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--accent-soft);
+  cursor:pointer;position:relative;overflow:hidden;border-radius:8px;
+  transition:color .25s,background .25s,border-color .25s;display:inline-flex;align-items:center;gap:10px;
 }
 .btn::before{
-  content:"";position:absolute;inset:0;background:var(--ink);
+  content:"";position:absolute;inset:0;background:var(--accent-soft);
   transform:translateX(-101%);transition:transform .35s cubic-bezier(.2,.7,.1,1);z-index:0;
 }
 .btn > *{position:relative;z-index:1;}
-.btn:hover{color:var(--paper);}
+.btn:hover{color:#fff;}
 .btn:hover::before{transform:translateX(0);}
 .btn:disabled{opacity:.35;cursor:not-allowed;}
-.btn:disabled:hover{color:var(--ink);}
+.btn:disabled:hover{color:var(--accent-soft);}
 .btn:disabled:hover::before{transform:translateX(-101%);}
-.btn.primary{background:var(--ink);color:var(--paper);}
+.btn.primary{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:700;}
 .btn.primary::before{background:var(--accent);}
-.btn.primary:hover{color:var(--paper);}
-.btn.ghost{border-color:var(--field-border);color:var(--ink-soft);}
+.btn.primary:hover{color:#fff;}
+.btn.ghost{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.85);background:transparent;}
+.btn.ghost::before{background:rgba(255,255,255,.12);}
+.btn.ghost:hover{color:#fff;border-color:rgba(255,255,255,.5);}
 .btn-step{
   font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--ink-mute);text-align:center;
@@ -437,11 +423,10 @@ textarea.input{resize:vertical;min-height:90px;font-family:var(--body);line-heig
   display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;
 }
 .summary-head h2{
-  font-family:var(--display);font-weight:300;font-size:clamp(36px,5vw,72px);
-  line-height:1;margin:0;letter-spacing:-.02em;
-  font-variation-settings:"opsz" 96, "SOFT" 30;
+  font-family:var(--display);font-weight:800;font-size:clamp(36px,5vw,72px);
+  line-height:1.05;margin:0;letter-spacing:-.02em;
 }
-.summary-head h2 em{font-style:italic;color:var(--accent);}
+.summary-head h2 em{font-style:normal;color:var(--accent);font-weight:800;}
 .summary-actions{display:flex;gap:10px;flex-wrap:wrap;}
 
 .summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;}
@@ -463,20 +448,19 @@ textarea.input{resize:vertical;min-height:90px;font-family:var(--body);line-heig
 .kv{display:grid;grid-template-columns:160px 1fr;gap:8px 18px;font-size:14px;line-height:1.5;}
 .kv dt{color:var(--ink-mute);font-size:12.5px;}
 .kv dd{margin:0;color:var(--ink);}
-.kv dd.empty{color:var(--ink-mute);font-style:italic;}
+.kv dd.empty{color:var(--ink-mute);}
 
 .summary-foot{
   margin-top:64px;padding-top:32px;border-top:1px solid var(--rule);
   display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;
 }
 .summary-foot p{
-  font-family:var(--display);font-style:italic;font-weight:300;
-  font-size:20px;color:var(--ink-soft);max-width:50ch;margin:0;
-  font-variation-settings:"opsz" 36;
+  font-family:var(--body);font-weight:400;
+  font-size:18px;color:var(--ink-soft);max-width:50ch;margin:0;line-height:1.5;
 }
 
 /* error */
-.invalid{border-color:var(--accent)!important;background:#FFF1EB!important;}
+.invalid{border-color:#D14848!important;background:#FDEEEE!important;}
 .error-msg{
   display:none;
   font-family:var(--mono);font-size:11px;letter-spacing:.06em;
@@ -517,13 +501,14 @@ textarea.input{resize:vertical;min-height:90px;font-family:var(--body);line-heig
 
 /* toast */
 .toast{
-  position:fixed;left:50%;top:30px;transform:translateX(-50%) translateY(-120%);
+  position:fixed;left:50%;top:30px;transform:translateX(-50%) translateY(-200%);
   background:var(--ink);color:var(--paper);
-  padding:12px 24px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;z-index:100;
-  transition:transform .35s cubic-bezier(.2,.7,.1,1);
+  padding:12px 24px;font-family:var(--body);font-size:11px;letter-spacing:.14em;font-weight:600;
+  text-transform:uppercase;z-index:100;border-radius:8px;
+  opacity:0;pointer-events:none;
+  transition:transform .35s cubic-bezier(.2,.7,.1,1), opacity .25s ease;
 }
-.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto;}
 </style>
 </head>
 <body>
@@ -531,7 +516,7 @@ textarea.input{resize:vertical;min-height:90px;font-family:var(--body);line-heig
 
   <header class="topbar">
     <div class="brand">
-      <div class="brand-mark" aria-hidden="true"></div>
+      <svg class="brand-logo" viewBox="0 0 1816 424" fill="currentColor" role="img" aria-label="NEOwater" xmlns="http://www.w3.org/2000/svg"> <g transform="translate(0.000000,424.000000) scale(0.100000,-0.100000)"> <path d="M6228 3867 c-14 -8 -43 -20 -63 -27 -52 -17 -146 -115 -180 -186 -24 -52 -28 -71 -28 -164 -1 -99 1 -109 30 -165 17 -33 50 -80 72 -104 40 -44 40 -44 25 -79 -8 -20 -20 -42 -26 -50 -7 -8 -17 -22 -23 -32 -5 -9 -20 -35 -33 -56 -12 -22 -31 -52 -42 -69 -11 -16 -28 -46 -39 -65 -16 -30 -57 -80 -64 -80 -1 0 -36 10 -77 22 -99 29 -305 32 -392 5 -31 -9 -64 -17 -73 -17 -31 0 -196 -89 -260 -140 -57 -46 -150 -149 -182 -204 -28 -48 -66 -135 -79 -181 -31 -112 -36 -151 -32 -268 4 -125 21 -207 59 -279 10 -20 19 -41 19 -47 0 -21 102 -160 156 -212 160 -154 324 -220 568 -229 l149 -5 13 -45 c7 -25 21 -74 33 -110 40 -131 62 -206 68 -228 4 -18 -3 -33 -29 -60 -62 -66 -77 -92 -83 -148 -13 -97 1 -158 48 -217 130 -161 356 -138 452 45 35 67 35 168 0 237 -31 61 -107 128 -155 136 -59 10 -97 38 -103 77 -3 18 -13 56 -22 83 -39 115 -48 142 -54 175 -4 19 -13 46 -21 59 -12 23 -10 27 16 48 16 13 40 26 53 30 55 14 209 130 266 199 51 62 125 175 125 192 0 7 7 27 17 45 22 43 53 208 53 282 0 62 -33 252 -49 283 -5 9 -22 44 -37 77 -36 75 -118 180 -185 237 -127 106 -119 91 -79 153 11 17 29 46 40 65 11 19 29 49 40 65 17 26 32 51 76 127 6 10 22 30 35 44 21 22 29 25 66 19 83 -12 197 22 281 85 32 23 102 111 102 128 1 4 9 25 20 47 31 64 27 186 -7 272 -36 87 -116 171 -199 209 -73 33 -221 45 -266 21z m210 -212 c63 -42 84 -83 84 -165 0 -67 -2 -73 -37 -116 -132 -160 -375 -41 -333 162 11 55 25 74 82 115 33 25 48 29 103 29 51 0 71 -5 101 -25z m-684 -1070 c17 -7 47 -21 66 -30 66 -30 88 -45 144 -100 90 -88 138 -174 162 -285 60 -281 -75 -552 -331 -663 -87 -38 -199 -49 -317 -33 -53 8 -107 21 -119 30 -13 9 -29 16 -36 16 -6 0 -31 13 -55 30 -175 121 -262 282 -263 485 0 164 47 284 155 395 62 63 150 130 171 130 5 0 24 7 42 17 18 9 57 20 87 24 76 11 257 1 294 -16z m290 -1938 c31 -41 33 -70 6 -107 -27 -38 -71 -55 -102 -40 -73 39 -90 100 -41 152 21 22 36 28 69 28 37 0 47 -5 68 -33z"/> <path d="M14300 3081 c-99 -21 -235 -129 -260 -207 -7 -22 -17 -45 -23 -52 -6 -8 -13 -53 -15 -101 -4 -74 -1 -96 17 -136 11 -26 21 -52 21 -57 0 -14 49 -78 90 -116 19 -19 63 -47 97 -63 55 -26 73 -29 158 -29 86 0 104 3 161 30 75 34 151 107 183 174 12 24 28 49 35 56 10 7 178 11 579 10 503 0 567 1 581 16 12 11 16 35 16 90 0 127 67 114 -594 114 l-573 0 -27 40 c-14 22 -26 44 -26 50 0 20 -117 126 -167 152 -57 29 -185 44 -253 29z m217 -244 c139 -134 19 -357 -174 -321 -45 8 -78 31 -115 81 -25 32 -28 46 -28 108 0 71 0 71 48 123 38 41 56 53 92 60 71 13 128 -3 177 -51z"/> <path d="M334 2807 c-12 -7 -14 -120 -14 -762 0 -414 3 -760 6 -769 5 -13 25 -16 110 -16 104 0 105 0 115 27 6 17 9 230 9 596 -2 589 0 620 37 572 8 -11 25 -40 38 -65 59 -117 147 -287 156 -302 5 -10 13 -26 18 -35 6 -10 37 -70 69 -133 33 -63 87 -169 122 -235 34 -66 96 -185 137 -265 41 -80 80 -148 86 -152 7 -4 82 -8 168 -8 134 0 158 2 163 16 3 9 6 355 6 769 0 641 -2 755 -14 762 -8 4 -59 6 -113 3 l-98 -5 -5 -595 c-5 -594 -5 -595 -26 -598 -17 -2 -26 9 -48 55 -15 32 -58 117 -96 188 -38 72 -94 180 -125 240 -31 61 -92 178 -134 260 -43 83 -110 213 -150 289 -39 77 -76 145 -82 152 -12 15 -310 25 -335 11z"/> <path d="M7463 2812 c-119 -3 -121 -5 -97 -97 25 -98 54 -216 69 -280 8 -33 20 -85 28 -115 14 -49 36 -138 65 -255 5 -22 15 -62 22 -90 25 -102 53 -212 72 -290 11 -44 26 -105 35 -135 8 -30 20 -82 28 -115 21 -94 37 -149 48 -163 7 -9 51 -12 176 -10 l165 3 18 48 c10 27 25 76 33 110 34 149 43 185 58 237 8 30 21 78 27 105 21 85 32 127 50 195 21 80 40 153 52 205 5 22 18 69 28 105 10 36 21 81 24 102 11 65 60 58 72 -11 3 -20 13 -58 21 -85 8 -26 21 -74 29 -105 7 -31 22 -94 34 -141 12 -47 27 -110 34 -140 7 -30 20 -80 29 -110 24 -87 66 -252 93 -370 8 -35 24 -84 34 -107 l19 -43 165 0 c121 0 167 3 173 12 4 7 14 36 21 63 21 79 52 205 67 270 8 33 20 85 28 115 9 30 24 91 35 135 11 44 25 103 32 130 7 28 17 68 22 90 6 22 18 72 28 110 23 89 40 155 56 225 21 92 46 192 66 262 11 37 18 82 16 100 l-3 33 -105 5 c-126 6 -129 4 -154 -96 -9 -38 -26 -102 -36 -141 -11 -40 -20 -81 -20 -91 0 -10 -8 -45 -19 -78 -10 -32 -23 -81 -29 -109 -18 -85 -33 -147 -52 -220 -10 -38 -24 -92 -30 -120 -34 -152 -49 -213 -59 -238 -6 -16 -11 -43 -11 -61 0 -69 -57 -72 -73 -5 -4 19 -15 59 -24 89 -9 30 -22 80 -29 110 -7 30 -22 91 -34 135 -12 44 -28 107 -35 140 -8 33 -21 80 -30 104 -8 24 -15 52 -15 62 0 10 -7 40 -16 66 -16 45 -22 70 -59 228 -8 33 -21 80 -30 104 -8 24 -15 54 -15 67 0 47 -21 54 -164 54 -140 0 -156 -5 -156 -47 0 -12 -7 -44 -16 -70 -9 -26 -23 -74 -30 -105 -8 -32 -20 -84 -28 -115 -7 -32 -21 -84 -30 -115 -9 -32 -23 -84 -32 -115 -9 -32 -23 -84 -30 -115 -8 -32 -20 -84 -28 -115 -7 -32 -21 -80 -30 -106 -9 -26 -16 -56 -16 -66 0 -9 -7 -39 -16 -66 -9 -26 -22 -73 -28 -103 -12 -61 -34 -84 -60 -63 -9 8 -16 24 -16 37 0 14 -9 57 -19 97 -11 39 -28 108 -39 152 -11 44 -25 103 -32 130 -18 71 -47 192 -60 250 -6 28 -20 82 -30 120 -19 70 -32 126 -52 220 -23 105 -51 186 -67 193 -9 4 -62 6 -118 4z"/> <path d="M2702 2798 c-17 -17 -17 -1509 0 -1526 19 -19 981 -17 997 2 8 9 11 47 9 107 l-3 94 -379 3 c-263 1 -383 6 -393 14 -11 8 -13 53 -11 217 l3 206 362 5 c199 3 365 8 368 12 8 8 7 197 -1 210 -3 4 -164 8 -358 8 -260 0 -355 3 -364 12 -13 13 -18 381 -6 412 5 14 48 16 376 16 235 0 376 4 389 10 17 9 19 22 19 98 0 55 -4 92 -12 100 -17 17 -979 17 -996 0z"/> <path d="M10791 2784 c-12 -15 -24 -39 -27 -53 -3 -14 -13 -46 -23 -71 -17 -42 -28 -72 -53 -145 -6 -16 -17 -46 -26 -65 -8 -19 -18 -48 -23 -65 -4 -16 -20 -61 -34 -100 -15 -38 -33 -90 -41 -115 -8 -25 -21 -59 -29 -77 -8 -17 -15 -37 -15 -45 -1 -7 -9 -31 -20 -53 -11 -22 -20 -47 -20 -55 0 -8 -9 -33 -20 -55 -11 -22 -20 -47 -20 -55 0 -8 -9 -33 -20 -55 -11 -22 -19 -46 -20 -53 0 -8 -7 -28 -15 -45 -8 -18 -21 -52 -29 -77 -8 -25 -26 -76 -41 -115 -14 -38 -30 -85 -35 -104 -5 -18 -13 -38 -19 -44 -6 -6 -11 -26 -11 -44 l0 -33 108 0 c71 0 114 4 125 12 16 12 58 113 76 183 4 17 15 44 24 62 10 18 17 41 17 52 0 11 10 29 22 41 21 20 31 20 356 18 l335 -3 22 -45 c13 -25 28 -58 33 -75 41 -122 84 -230 96 -237 17 -11 224 -10 231 2 7 11 -20 108 -41 148 -8 15 -14 34 -14 42 0 8 -9 33 -20 55 -11 22 -20 47 -20 55 0 8 -9 33 -20 55 -11 22 -19 46 -20 53 0 8 -7 28 -15 45 -8 18 -21 52 -29 77 -8 25 -26 77 -41 115 -14 39 -30 84 -34 100 -5 17 -15 46 -23 65 -9 19 -20 50 -27 68 -29 83 -35 100 -51 142 -16 42 -27 72 -52 145 -6 17 -18 50 -28 75 -10 25 -22 60 -29 78 -18 53 -33 94 -57 157 l-23 60 -169 3 -170 2 -21 -26z m225 -301 c13 -31 24 -62 24 -70 0 -8 7 -28 17 -46 9 -18 20 -45 24 -62 11 -40 47 -145 59 -170 6 -11 16 -40 24 -65 29 -91 54 -158 67 -177 7 -11 9 -28 6 -37 -6 -14 -35 -16 -262 -16 -210 0 -257 2 -261 14 -3 8 5 43 19 78 35 93 47 128 63 178 8 25 18 54 24 65 6 11 16 40 24 65 19 60 35 106 57 160 10 25 20 57 23 71 7 33 45 81 57 73 6 -3 21 -31 35 -61z"/> <path d="M12430 2791 c-17 -32 -13 -167 6 -185 13 -14 49 -16 239 -16 194 0 224 -2 229 -16 3 -9 6 -302 6 -653 0 -482 3 -640 12 -649 8 -8 46 -12 103 -12 57 0 95 4 103 12 9 9 12 168 12 653 0 485 3 644 12 653 9 9 73 12 226 12 128 0 221 4 233 10 17 9 19 22 19 98 0 55 -4 92 -12 100 -9 9 -155 12 -595 12 -565 0 -583 -1 -593 -19z"/> <path d="M16743 2799 c-20 -20 -19 -1512 1 -1528 9 -8 48 -11 112 -9 l99 3 3 259 c1 171 6 264 13 273 7 7 31 13 57 13 l46 0 276 -275 276 -275 132 0 c117 0 132 2 132 17 0 9 -111 128 -247 265 -135 136 -243 251 -239 255 4 4 48 15 98 25 103 21 162 51 229 119 104 103 144 207 144 374 0 87 -5 125 -23 182 -13 40 -30 77 -38 84 -8 6 -14 17 -14 24 0 24 -121 135 -182 167 l-63 33 -400 3 c-312 3 -403 0 -412 -9z m748 -228 c97 -43 149 -134 149 -258 0 -62 -5 -88 -25 -128 -31 -64 -50 -85 -106 -118 l-46 -27 -249 2 -249 3 -3 250 c-1 138 0 260 3 273 l5 22 239 0 c214 0 243 -2 282 -19z"/> <path d="M14654 2145 c-16 -13 -24 -199 -8 -215 7 -7 162 -9 480 -8 l469 3 3 108 c2 81 0 109 -10 112 -27 11 -921 10 -934 0z"/> <path d="M15790 1732 c-47 -19 -82 -44 -127 -89 -35 -35 -63 -68 -63 -75 0 -8 -11 -30 -25 -51 l-26 -37 -574 0 c-413 0 -576 -3 -581 -11 -10 -18 -4 -182 8 -196 8 -10 128 -13 578 -13 636 0 576 7 618 -76 28 -55 103 -127 165 -159 98 -49 244 -49 345 2 76 37 161 134 190 214 51 147 18 293 -93 404 -81 81 -163 115 -273 114 -60 0 -91 -6 -142 -27z m249 -197 c62 -45 82 -85 83 -160 0 -58 -4 -73 -29 -109 -33 -48 -101 -86 -154 -86 -127 0 -216 112 -188 238 10 42 21 61 60 97 48 45 48 45 122 45 62 0 78 -4 106 -25z"/> </g> </svg>
       <div class="brand-text">
         <strong>NEO DRAIN</strong>
         <span>Neo Water · БМОС</span>
@@ -566,7 +551,7 @@ textarea.input{resize:vertical;min-height:90px;font-family:var(--body);line-heig
             </div>
             <div class="spec">
               <div class="spec-label">Назначение</div>
-              <div class="spec-value">B2B&nbsp;<em style="font-style:italic;color:var(--accent);">·</em>&nbsp;инжиниринг</div>
+              <div class="spec-value">B2B&nbsp;<em style="color:var(--accent);">·</em>&nbsp;инжиниринг</div>
             </div>
           </div>
         </div>
@@ -576,7 +561,7 @@ textarea.input{resize:vertical;min-height:90px;font-family:var(--body);line-heig
             <ul class="toc-list" id="tocList"></ul>
           </div>
           <div>
-            <p style="font-family:var(--display);font-style:italic;font-weight:300;font-size:18px;color:var(--ink-soft);max-width:42ch;margin:0 0 20px;font-variation-settings:'opsz' 24;">Ваши ответы сохраняются в этом браузере автоматически. Заполнить можно за несколько подходов.</p>
+            <p style="font-family:var(--body);font-weight:400;font-size:17px;color:var(--ink-soft);max-width:42ch;margin:0 0 20px;line-height:1.55;">Ваши ответы сохраняются в этом браузере автоматически. Заполнить можно за несколько подходов.</p>
             <div class="cover-cta">
               <button class="btn primary" id="startBtn">
                 <span>Начать заполнение</span>
